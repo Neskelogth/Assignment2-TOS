@@ -23,13 +23,28 @@ public class Bill implements TakeAwayBill {
     public double getOrderPrice(List<MenuItem> itemsOrdered, User user) throws TakeAwayBillException {
         
         double tot = 0;
+        int icereamCounter = 0;
+        double minPriceForIcecream = Double.MAX_VALUE;
         
         for(MenuItem mi : itemsOrdered) {
             
             tot += mi.getPrice();
+            
+            if(mi.getType().equals(MenuItem.items.Gelato)) {
+                
+                icereamCounter++;
+                if(mi.getPrice() < minPriceForIcecream) {
+                    
+                    minPriceForIcecream = mi.getPrice();
+                }
+            }
+        }
+        
+        if(icereamCounter >= 5) {
+         
+            tot -= minPriceForIcecream / 2;
         }
         
         return tot;
     }
-
 }

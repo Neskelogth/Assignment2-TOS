@@ -56,6 +56,21 @@ public class BillTest {
         }
     }
     
+    @Test
+    public void ComputeTotalWith10PercentDiscountTest() {
+        
+        li.add(new MenuItem("Banana split",MenuItem.items.Gelato, 10.00));
+        li.add(new MenuItem("Banana split",MenuItem.items.Gelato, 10.00));
+        li.add(new MenuItem("Banana split",MenuItem.items.Gelato, 10.00));
+        li.add(new MenuItem("Biancaneve",MenuItem.items.Budino, 10.00));
+        li.add(new MenuItem("Biancaneve",MenuItem.items.Budino, 10.00));
+        try {
+            assertEquals(45,bi.getOrderPrice(li,us),0.0);
+        } catch (TakeAwayBillException e) {
+            System.out.println("Error");
+        }
+    }
+    
     @After
     public void EmptyList() {
      

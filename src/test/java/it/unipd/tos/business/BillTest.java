@@ -34,8 +34,9 @@ public class BillTest {
         
         li.add(new MenuItem("Cola",MenuItem.items.Bevanda,2.50));
         li.add(new MenuItem("Coppa Nafta",MenuItem.items.Gelato, 4.00));
+        li.add(new MenuItem("Banana split",MenuItem.items.Gelato, 10.00));
         try {
-            assertEquals(6.50,bi.getOrderPrice(li,us),0.0);
+            assertEquals(16.50,bi.getOrderPrice(li,us),0.0);
         } catch (TakeAwayBillException e) {
             System.out.println("Error");
         }
@@ -81,6 +82,18 @@ public class BillTest {
         }
      
         bi.getOrderPrice(li, us);
+    }
+    
+    @Test
+    public void lessThen10EurosCommissionTest() {
+        
+        li.add(new MenuItem("Cola",MenuItem.items.Bevanda,2.50));
+        
+        try {
+            assertEquals(3,bi.getOrderPrice(li,us),0.0);
+        }catch(TakeAwayBillException e) {
+            System.out.println("Error");
+        }
     }
     
     @After

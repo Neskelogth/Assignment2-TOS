@@ -50,6 +50,11 @@ public class Bill implements TakeAwayBill {
             }
         }
         
+        if (tot < 10) {
+            
+            tot += 0.5;
+        }
+        
         if(totWithoutDrinks >= 50) {
             tot *= 0.9;
         }

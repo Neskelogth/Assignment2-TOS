@@ -5,4 +5,4 @@
 
 ## Code Coverage
 
-[![Coverage Status](https://coveralls.io/repos/github/Neskelogth/Assignment2TOS/badge.svg?branch=main)](https://coveralls.io/github/Neskelogth/Assignment2TOS?branch=main)
+

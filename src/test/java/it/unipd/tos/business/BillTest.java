@@ -71,6 +71,18 @@ public class BillTest {
         }
     }
     
+    @Test (expected = TakeAwayBillException.class)
+    public void ErrorForNumberOfOrders() throws TakeAwayBillException{
+        
+        
+        for(int i = 0; i < 30; i++) {
+            
+            li.add(new MenuItem("Cola",MenuItem.items.Bevanda,2.50));
+        }
+     
+        bi.getOrderPrice(li, us);
+    }
+    
     @After
     public void EmptyList() {
      

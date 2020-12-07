@@ -5,7 +5,6 @@
 package it.unipd.tos.business;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.time.LocalTime;
 
 import it.unipd.tos.business.exception.TakeAwayBillException;
@@ -26,6 +25,11 @@ public class Bill implements TakeAwayBill {
         int icereamCounter = 0;
         double minPriceForIcecream = Double.MAX_VALUE;
         double totWithoutDrinks = 0; 
+        
+        if(itemsOrdered.size() >= 30) {
+            
+            throw new TakeAwayBillException("Too much orders");
+        }
         
         for(MenuItem mi : itemsOrdered) {
             

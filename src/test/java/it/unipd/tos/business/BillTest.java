@@ -12,6 +12,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalTime;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import org.junit.Rule;
+import org.junit.rules.Timeout;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
@@ -21,12 +25,30 @@ public class BillTest {
     Bill bi; 
     List<MenuItem> li;
     User us;
-
+    
+    @Rule
+    public Timeout globalTimeout= new Timeout(1000);
+    
     @Before
     public void setup (){
-        bi = new Bill(LocalTime.of(12,0,0,0));
-        li = new ArrayList<MenuItem>();
         us = new User("Samuel","Kostadinov",21, 1);
+        bi = new Bill(LocalTime.of(12,0,0,0), us);
+        li = new ArrayList<MenuItem>();
+    }
+    
+    @Test
+    public void getUserTest() {
+        assertEquals(us,bi.getUser());
+    }
+    
+    @Test
+    public void getLocalTimeTest() {
+        assertEquals(LocalTime.of(12,0,0,0),bi.getLocalTime());
+    }
+    
+    @Test
+    public void getGiftedTest() {
+        assertFalse(bi.getWasGifted());
     }
 
     @Test
@@ -94,6 +116,21 @@ public class BillTest {
         }catch(TakeAwayBillException e) {
             System.out.println("Error");
         }
+    }
+    
+    @Test
+    public void GiftTest() {
+        
+        boolean trueFound = false;
+        for (int i = 0; i < 1000; i++) {
+        
+            Bill b = new Bill(LocalTime.of(18,30),new User("Samuel", "Kostadinov", 15, i + 1));
+            if(b.getWasGifted()) {
+            
+                trueFound = true;
+            }
+        }
+        assertTrue(trueFound);
     }
     
     @After
